@@ -43,22 +43,27 @@ docker build -t desktop-apps .
 
 ## 🖥 Қосымшаларды экранға шығару
 
-1. Ақылды кофе кассасын іске қосу (coffee_kds.py):
+### 1. Ақылды кофе кассасын іске қосу (coffee_kds.py)
+
+```bash
 docker run -it --rm \
     --user $(id -u):$(id -g) \
-    -e DISPLAY=$DISPLAY \
-    -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+    -e DISPLAY=\$DISPLAY \
+    -e WAYLAND_DISPLAY=\$WAYLAND_DISPLAY \
     -e QT_X11_NO_MITSHM=1 \
     -e QT_QPA_PLATFORM=xcb \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /mnt/wslg:/mnt/wslg \
     desktop-apps python coffee_kds.py
+```
 
-2. Lo-Fi фокус-станциясын дыбыспен іске қосу (lofi_companion.py):
+### 2. Lo-Fi фокус-станциясын дыбыспен іске қосу (lofi_companion.py)
+
+```bash
 docker run -it --rm \
     --user $(id -u):$(id -g) \
-    -e DISPLAY=$DISPLAY \
-    -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY \
+    -e DISPLAY=\$DISPLAY \
+    -e WAYLAND_DISPLAY=\$WAYLAND_DISPLAY \
     -e QT_X11_NO_MITSHM=1 \
     -e QT_QPA_PLATFORM=xcb \
     -e PULSE_SERVER=unix:/mnt/wslg/PulseServer \
@@ -68,6 +73,7 @@ docker run -it --rm \
     --device /dev/snd \
     --group-add audio \
     desktop-apps python lofi_companion.py
+```
 
 ---
 
